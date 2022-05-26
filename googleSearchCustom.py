@@ -11,12 +11,15 @@ resourse = build("customsearch", "v1", developerKey=api_key).cse()
 # Create an empty dictionary
 FoundData = []
 
-for i in range(1, 100, 10):
+for i in range(101, 151, 10):
     # Use list function to query the keyword
-    result = resourse.list(q="zalo", cx=search_engine_id, start=i).execute()
+    try:
+        result = resourse.list(q="zalo", cx=search_engine_id, start=i).execute()
 
-    # Add each found items to FoundData
-    FoundData += result['items']
+        # Add each found items to FoundData
+        FoundData += result['items']
+    except Exception as exc:
+        print("There was a problem: %s" % (exc))
 
 # Loop over the dictionary
 for i, item in enumerate(FoundData):
